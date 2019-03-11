@@ -1,0 +1,3 @@
+# Johdatustekoalyyn
+
+Repo luotu
