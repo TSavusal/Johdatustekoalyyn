@@ -87,16 +87,19 @@ class EightPuzzle:
             horizontalvalue = abs(horizontalstatevalue - horizontalgoalvalue)
             manhattanvalue += verticalvalue + horizontalvalue
         return manhattanvalue
-		
+
     def calculateHamming(self, state):
         """
         Tämä funktio laskee kuinka moni nykyisen tilan laatoista on väärällä paikalla ja palauttaa hamming-etäisyyden.
         """
         hammingvalue = 0
         #-------TAHAN SINUN KOODI--------
-        
-        
-        #--------------------------------
+        goalState = [1,2,3,4,5,6,7,8,0]
+        for i,aThing in enumerate(goalState):
+            if state[i] == 0:
+                continue
+            if goalState[i] != state[i]:
+                hammingvalue+=1
         return hammingvalue
 		
     def evaluationFunction(self, state, evaluation):
@@ -199,12 +202,21 @@ def main():
     print('The start state 1 with hamming-distance:')
     game.aStar(startstate1, evaluation='hamming', print_path=False)	
     #-------TAHAN SINUN KOODI--------
+    startstate2 = [8,1,0,5,3,2,4,7,6]
+    print('\nThe start state 2 is:')
+    game.printState(startstate2)
+    print('The start state 2 with city-block-distance:')
+    game.aStar(startstate2, evaluation='city-block', print_path=False)
+    print('The start state 2 with hamming-distance:')
+    game.aStar(startstate2, evaluation='hamming', print_path=False)	
     
-    
+    startstate3 = [2,8,0,5,7,3,4,1,6]
+    print('\nThe start state 3 is:')
+    game.printState(startstate3)
+    print('The start state 3 with city-block-distance:')
+    game.aStar(startstate3, evaluation='city-block', print_path=False)
+    print('The start state 3 with hamming-distance:')
+    game.aStar(startstate3, evaluation='hamming', print_path=False)	
     #--------------------------------
-	
- 
-    
-	
 if __name__ == '__main__':
     main()
