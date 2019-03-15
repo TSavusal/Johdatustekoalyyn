@@ -62,8 +62,35 @@ def illegalStates(roles):
         allstates.extend(els)
     allstates.append([])
     #-------TAHAN SINUN KOODI--------
-    
-    
+    for aState in allstates:
+        husbands=[]
+        wives=[]
+        
+        #Extract wives and husbands to their own lists
+        for aSubstate in aState:
+            if "H" in aSubstate:
+                husbands.append(aSubstate[1])
+            elif "W" in aSubstate:
+                wives.append(aSubstate[1])
+                
+        #Check if the state is legal
+        legal=False
+        if(len(husbands) == 0 or len(wives) == 0):
+            legal=True
+        elif(husbands == wives):
+            legal=True
+        elif(len(husbands) == 3):
+            legal=True
+        elif(len(husbands) == 2 and len(wives) == 1 and wives[0] in husbands):
+            legal=True
+            
+        #Append to lists:
+        if legal:
+            legalstates.append(aState)
+        else:
+            illegalstates.append(aState)
+            
+        #Note: 2nd loop is not needed since we take care of the illegate states during the first loop
     #--------------------------------
     return illegalstates
 
