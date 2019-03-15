@@ -98,7 +98,7 @@ class EightPuzzle:
         for i,aThing in enumerate(goalState):
             if state[i] == 0:
                 continue
-            if goalState[i] != state[i]:
+            elif goalState[i] != state[i]:
                 hammingvalue+=1
         return hammingvalue
 		
