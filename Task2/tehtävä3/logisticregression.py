@@ -32,9 +32,14 @@ def main():
         data.append(reader[i][1:])
     data = np.asarray(data).astype(float)
     #-------TÄHÄN SINUN KOODI--------
-    
-    
+    lr=linear_model.LogisticRegressionCV(solver='liblinear',cv=5,multi_class='auto') 
+    lr.fit(data, labels)
+    wine_test_sample = [12.3, 1.5, 2, 15, 95, 2, 1.9, 0.4, 1.3, 3, 1, 2.5, 800] 
+    # seed_test_sample = [15, 15, 0.86, 5.1, 3.3, 4, 5] 
+    # leaf_test_sample = [0.55, 1.0, 0.55, 0.75, 0.78, 0.28, 0.08, 1.2, 0.1, 0.15, 0.02,0.007, 0.0008, 2.5] 
+    # glass_test_sample = [1.516, 13, 3.5, 1.5, 72.9, 0.6, 8, 0, 0.1] 
+    predict_probs = lr.predict_proba([wine_test_sample])[0] 
+    drawBarDiagram(labels, predict_probs)
     #--------------------------------
-	
 if __name__ == '__main__':
     main()

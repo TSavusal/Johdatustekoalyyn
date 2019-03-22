@@ -24,16 +24,25 @@ def performance(Y_test, X_test, coeffs, f):
     print(y)
 
 def main():
-    inputfile = "data1_ects_accumulation.txt"    # Ladataan datajoukko (vakiona opintopistekertymä datajoukko)
+    # inputfile = "data1_ects_accumulation.txt"    # Ladataan datajoukko (vakiona opintopistekertymä datajoukko)
+    inputfile = "data1_population_growth_finland.txt"    # Ladataan datajoukko (vakiona opintopistekertymä datajoukko)
     X = np.loadtxt(inputfile, delimiter=",", usecols=[0])
     Y = np.loadtxt(inputfile, delimiter=",", usecols=[1])
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.1)
     plt.scatter(X_train, Y_train, color="blue",s=5, marker='o') # Plotataan opetusjoukon näytteet kuvaajaan 
     #-------TÄHÄN SINUN KOODI--------
-    
-    
+    coeffs = np.polyfit(X_train, Y_train, 3)
+    function = np.poly1d(coeffs)
+    x_line = np.linspace(min(X_train), max(X_train))
+    y_line = function(x_line)
+    plt.plot(x_line,y_line, color="red")
+    vakiluku2035 = function(2035)
+    print("Väkiluku vuonna 2035: "+str(vakiluku2035))
+    plt.title("Population growth")
+    plt.xlabel("Vuosi")
+    plt.ylabel("Population")
     #--------------------------------
-    #performance(Y_test, X_test, coeffs, function)   # Ota kommenttimerkki pois tämän rivin edestä testataksesi luomasi mallin suorituskykyä
+    performance(Y_test, X_test, coeffs, function)   # Ota kommenttimerkki pois tämän rivin edestä testataksesi luomasi mallin suorituskykyä
     plt.grid()   # Plotataan kuvaajaan ruudukko
     plt.show()   # Näytetään kuvaaja
 	
