@@ -17,8 +17,9 @@ def Kmeans(X, num_clusters):
     Klusterointi K-means-algoritmilla. Funktio palauttaa klusteroinnin lopputuloksen
     """
     #-------TÄHÄN SINUN KOODI--------
-    
-    
+    kmeans = KMeans(init='k-means++', n_clusters=num_clusters, n_init=20).fit(X)
+    labels = kmeans.labels_
+    return labels
     #--------------------------------
 
 def Dbscan(X, epsilon, minimum_samples):
@@ -26,8 +27,10 @@ def Dbscan(X, epsilon, minimum_samples):
     Klusterointi DBSCAN algoritmilla. Funktio palauttaa klusteroinnin lopputuloksen
     """
     #-------TÄHÄN SINUN KOODI--------
-    
-    
+    dbscan = DBSCAN(eps=epsilon, min_samples=minimum_samples).fit(X)
+    labels = dbscan.labels_
+    labels = [len(set(labels)) if i==-1 else i for i in labels]
+    return labels
     #--------------------------------
 
 def Agglomerative_clustering(X, num_clusters):
@@ -35,8 +38,9 @@ def Agglomerative_clustering(X, num_clusters):
     Klusterointi hierarkkinen klusterointi algoritmilla. Funktio palauttaa klusteroinnin lopputuloksen
     """
     #-------TÄHÄN SINUN KOODI--------
-    
-    
+    model = AgglomerativeClustering(linkage='ward', n_clusters=num_clusters).fit(X)
+    labels = model.labels_
+    return labels
     #--------------------------------
 	
 def Load_csv_data(fname):
